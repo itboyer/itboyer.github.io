@@ -35,7 +35,47 @@ $(function () {
 		+'	</div>                                                                                                                                                    '
 		+'</header>';
 	  $('#nav').append(text);
+	  
+	  
+	  
+	  
+	  
 	}
+	//点击事件
+	var a_idx=0;jQuery(document).ready(function($){$("body").click(function(e){var a=new Array("富强","民主","文明","和谐","自由","平等","公正","法治","爱国","敬业","诚信","友善");var $i=$("<span/>").text(a[a_idx]);a_idx=(a_idx+1)%a.length;var x=e.pageX,y=e.pageY;$i.css({"z-index":999999999999999999999999999999999999999999999999999999999999999999999,"top":y-20,"left":x,"position":"absolute","font-weight":"bold","color":"#ff6651"});$("body").append($i);$i.animate({"top":y-180,"opacity":0},1500,function(){$i.remove();});});});
+	//打赏优化
 	
+	$('.post-meta__tag-list').append(''
+					+'<button style="                '
+					+'border-width: 0px;             '
+					+'margin-bottom: 20px;           '
+					+'padding: 8px 25px;             '
+					+'font-size: 16px;               '
+					+'color: #fff;                   '
+					+'background-color: #ea6f5a;     '
+					+'border-radius: 5px;            '
+					+'touch-action: manipulation;    '
+					+'cursor: pointer;               '
+					+'background-image: none;        '
+					+'border: 1px solid transparent; '
+					+'white-space: nowrap;           '
+					+'user-select: none;             '
+					+'outline: none;                "'
+					+' id="dashang">打赏'
+				    +'</button>'
+					+'<span style="                  '
+					+'	display: inherit;            '
+					+'	margin:  -10px auto;         '
+					+'">如果你觉得我的文章对你有用，或者喜欢我写的文章，欢迎微信支付宝打赏！</span>        '
+					);
+	$('#dashang').on("click",function(){
+		if(!$(".post-qr-code").is(":visible")){
+          $(".post-qr-code").show(); 
+          $(this).val("隐藏");
+         }else{ 
+          $(".post-qr-code").hide(); 
+          $(this).val("显示");
+		 }
+	});
 	
 })

@@ -1,17 +1,16 @@
-#site-title,{
+#site-title,#site-name{
     font-family: "Comic Sans MS", sans-serif;
 }
 #masthead {
-    position: relative;
-    z-index: 2;
-    display: block;
-    color: #fff;
-    text-align: center;
-    width: 100%;
-    height: 400px;
-    box-sizing: border-box;
+	margin-top: 100px;
+    z-index: -1;
 }
-
+.post-meta__tag-list{
+	text-align: center;
+}
+.post-qr-code{
+	display: none;
+}
 .text-center {
     text-align: center!important;
 }
@@ -34,8 +33,6 @@ h1.post_title {
 }
 #particles-js {
     position: absolute;
-    top: -100px;
-    width: 60%;
     height: 100%;
 }
 .decor-wrapper {
