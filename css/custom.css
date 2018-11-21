@@ -1,6 +1,9 @@
 #site-title,#site-name{
     font-family: "Comic Sans MS", sans-serif;
 }
+body{
+	background-color: #fff;
+}
 .post-meta__tags{
 	float: left;
 }
