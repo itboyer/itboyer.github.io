@@ -46,7 +46,7 @@ $(function () {
 	//打赏优化
 	
 	$('.post-meta__tag-list').append(''
-					+'<button style="                '
+					+'<div style="text-align: center;padding:  10px; clear:  both;"><button style=" '
 					+'border-width: 0px;             '
 					+'margin-bottom: 20px;           '
 					+'padding: 8px 25px;             '
@@ -66,7 +66,7 @@ $(function () {
 					+'<span style="                  '
 					+'	display: inherit;            '
 					+'	margin:  -10px auto;         '
-					+'">如果你觉得我的文章对你有用，或者喜欢我写的文章，欢迎微信支付宝打赏！</span>        '
+					+'">如果你觉得我的文章对你有用，或者喜欢我写的文章，欢迎微信支付宝打赏！</span></div>'
 					);
 	$('#dashang').on("click",function(){
 		if(!$(".post-qr-code").is(":visible")){

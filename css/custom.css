@@ -1,6 +1,9 @@
 #site-title,#site-name{
     font-family: "Comic Sans MS", sans-serif;
 }
+.post-meta__tags{
+	float: left;
+}
 #masthead {
 	margin-top: 100px;
     z-index: -1;
