@@ -15,7 +15,7 @@ body{
 }
 
 #site-info {
-    padding: 120px;
+    padding: 120px 0;
     margin-bottom: 120px;
 }
 
@@ -53,4 +53,14 @@ footer {
 canvas{
 	top: -420px;
 }
+#particles-js {
+    position: absolute;
+    top: -100px;
+    width: 100%;
+    height: 100%;
+	z-index: 0
+}
 
+#{
+	z-index: 10
+}
