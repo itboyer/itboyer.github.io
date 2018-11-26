@@ -50,31 +50,6 @@
       
     </entry>
     
-    <entry>
-      <title>测试</title>
-      <link href="/index/"/>
-      <url>/index/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> Hexo教程 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 标签1 </tag>
-            
-            <tag> 标签2 </tag>
-            
-        </tags>
-      
-    </entry>
-    
   
   
 </search>
