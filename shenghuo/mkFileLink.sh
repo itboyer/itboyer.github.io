@@ -1,4 +1,4 @@
-ThisPath=`pwd`
+ThisPath=$(cd `dirname $0`;pwd)
 list=$(ls -l $ThisPath | awk '{if(substr($1,1,1)=="d"){ print $9}}')
 echo "$list" | while read line;
 do
