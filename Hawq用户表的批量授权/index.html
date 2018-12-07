@@ -11,7 +11,7 @@
 <p>近期公司有新入职小伙伴不小心在生产的用户上直接跑了ETL脚本，对于hawq的用户权限方面控制需要加强，查阅官方文档，发现hawq在用户的权限管理方面做得不是那么那么好，不能对库级别、或者schema级别的表做只读权限，只能单张表授权控制。<br>    没办法，那就写shell脚本统一控制吧。</p>
 </blockquote>
 <h1 id="新建角色"><a href="#新建角色" class="headerlink" title="新建角色"></a>新建角色</h1><p>创建访客角色Guest,只具有登陆权限<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">ROLE</span> guest <span class="keyword">WITH</span> LOGIN;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">ROLE</span> guest <span class="keyword">WITH</span> <span class="keyword">PASSWORD</span> <span class="string">'*********'</span>;</span><br></pre></td></tr></table></figure></p>
-<p>执行<code>select pg_reload_conf()</code>重新加载hawq配置</p>
+<p>执行<code>select pg_reload_conf()</code>重新加载hawq配置<br><a id="more"></a></p>
 <h1 id="授权访问"><a href="#授权访问" class="headerlink" title="授权访问"></a>授权访问</h1><p>配置pg_hba.conf，使外部client使用该用户登陆,并设置为<code>password</code>/<code>md5</code>的登陆方式</p>
 <p><img src="/images/pasted-9.png" alt="pg_hba.conf配置"></p>
 <p>测试连接是否成功</p>
