@@ -15,19 +15,25 @@
 <div class="loadMenu" style="display:none;">/shenghuo/sheying</div>
 </div><div class="tab-pane" id="选项卡-4"><p><strong>目录</strong></p>
 <div class="loadMenu" style="display:none;">/shenghuo/yingshi</div>
-</div></div></div></div></article><nav id="pagination"><div class="pagination"></div></nav><div class="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://panjunwen.github.io/Valine/dist/Valine.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script>var notify = 'false' == true ? true : false;
+</div></div></div></div></article><nav id="pagination"><div class="pagination"></div></nav><div class="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="/dist/Valine.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script>var notify = 'false' == true ? true : false;
 var verify = 'false' == true ? true : false;
 var GUEST_INFO = ['nick','mail','link'];
 var guest_info = 'nick,mail,link'.split(',').filter(function(item){
   return GUEST_INFO.indexOf(item) > -1
 });
 guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
-new Valine({
+window.valine = new Valine({
   av: AV, 
   el: '.vcomment',
-  app_id:' Sb3I3kxloC2uM8kp7GwsFXyN-gzGzoHsz',
+  notify: notify,
+  verify: verify,
+  app_id: 'Sb3I3kxloC2uM8kp7GwsFXyN-gzGzoHsz',
   app_key: 'k6Jad1ggWtw42O55GAAMbFdu',
+  avatar:'robohash',
+  guest_info:guest_info,
+  pageSize:'10',
   placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+  lang: 'zh-cn',
   emoticon_url: '/alu',
   emoticon_list: ["吐.png","喷血.png","狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","中指.png","尴尬.png","瞅你.png","想一想.png","中枪.png","得意.png","肿包.png","扇耳光.png","亲亲.png","惊喜.png","脸红.png","无所谓.png","便便.png","愤怒.png","蜡烛.png","献黄瓜.png","内伤.png","投降.png","观察.png","看不见.png","击掌.png","抠鼻.png","邪恶.png","看热闹.png","口水.png","抽烟.png","锁眉.png","装大款.png","吐舌.png","无奈.png","长草.png","赞一个.png","呲牙.png","无语.png","阴暗.png","不出所料.png","咽气.png","期待.png","高兴.png","吐血倒地.png","哭泣.png","欢呼.png","黑线.png","喜极而泣.png","喷水.png","深思.png","鼓掌.png","暗地观察.png"]
 })</script></div></div><footer id="footer" style="background: url(/img/keyclack.jpg)  no-repeat center top/cover;background-position:  bottom; "><div class="layout" id="footer"><div class="copyright">&copy;2018 By itboyer</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/custom.js?version=10.2.16"></script><script src="/js/particle.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script src="/js/search/local-search.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
