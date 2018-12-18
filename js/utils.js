@@ -79,10 +79,7 @@ $(function() {
 	
 	function initMenu(){
 		var path = $(".tab-content .active .loadMenu").text();
-		debugger;
-		if(path != '/shenghuo' && path != '/shenghuo/'){
-			return;
-		}
+		path=path.split("#")[0];
 		if(!initFlag && path){
 			$.ajax({
 				url: path+"/link.txt",
