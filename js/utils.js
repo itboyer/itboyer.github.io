@@ -71,11 +71,11 @@ $(function() {
 		}
 	  }
 
-	//initMenu();
+	initMenu();
 		
 		
 	});
-	//initMenu();
+	initMenu();
 	
 	function initMenu(){
 		var path = $(".tab-content .active .loadMenu").text();
