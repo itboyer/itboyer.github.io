@@ -86,7 +86,7 @@ $(function() {
 				type:"get",
 				success:function (data) {
 					data.trim().split('\n').forEach(function(v, i) {
-						$(".tab-content .active").append((i+1)+'. <a href="'+path +'/' +v+'">'+v.split(".html")[0]+'</a>');
+						$(".tab-content .active").append((i+1)+'. <a href="'+path +'/' +v+'">'+v.split(".html")[0]+'</a><br/>');
 					})
 					//
 					initFlag = true;
