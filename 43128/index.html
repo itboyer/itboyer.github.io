@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="JMeter测试案例[加密登录、post请求]"><meta name="keywords" content="JMeter,性能测试"><meta name="author" content="itboyer"><meta name="copyright" content="itboyer"><title>JMeter测试案例[加密登录、post请求] | ITBOYER'S BLOG</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="stylesheet" href="/css/custom.css?version=10.2.17?version=1.5.6"><link rel="stylesheet" href="/css/tabs.css?version=10.2.17?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#下载和安装"><span class="toc-number">1.</span> <span class="toc-text">下载和安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#测试场景"><span class="toc-number">2.</span> <span class="toc-text">测试场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#操作"><span class="toc-number">3.</span> <span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建线程组"><span class="toc-number">3.1.</span> <span class="toc-text">创建线程组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登陆验证"><span class="toc-number">3.2.</span> <span class="toc-text">登陆验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建HTTP请求"><span class="toc-number">3.3.</span> <span class="toc-text">创建HTTP请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加监听器"><span class="toc-number">3.4.</span> <span class="toc-text">添加监听器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最终结果"><span class="toc-number">3.5.</span> <span class="toc-text">最终结果</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">itboyer</div><div class="author-info__description text-center">itboyer 个人站，主要涉及知识共享、前沿技术、生活记录共同学习等方面</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">6</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">10</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/keyclack.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ITBOYER'S BLOG</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">首页</a><a class="site-page" href="/archives">日志</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">目录</a><a class="site-page" href="/shenghuo">生活</a><a class="site-page" href="/photo">相册</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">JMeter测试案例[加密登录、post请求]</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-18</time><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">1.1k</span><span class="post-meta__separator">|</span><span>阅读时长: 3 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
+<p>近期项目上做了接口的平台迁移，为了测试迁移前后的性能损耗，以及socket长短连接的响应耗时时长，想测一下相关接口的性能级别<br>百度了一下相关测试软件，JMeter的文档比较多，使用率比较高，就跟着网上教程现学现卖了一下，做个小记录，方便以后翻阅</p>
+</blockquote>
+<h1 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h1><ol>
+<li>官方网站：<a href="http://jmeter.apache.org/" target="_blank" rel="noopener">http://jmeter.apache.org/</a> 在这里我下载的是最新版5.0的zip包</li>
+<li>5.0版本依赖JDK8以上的环境，配置JAVA_HOME</li>
+<li>解压后， 运行  “bin/jmeter.bat”如果运行不了，请检查JDK是否正常配置，javaw.exe是否在环境变量中</li>
+<li>Jmeter是支持中文的， 启动Jmeter 后， 点击 Options -&gt; Choose Language  来选择语言，如果低版本的找不到选择语音的选项，可以看下bin/jmeter.properties 在36行左右有语言配置设置<code>language=zh_CN</code><a id="more"></a>
+</li>
+</ol>
+<h1 id="测试场景"><a href="#测试场景" class="headerlink" title="测试场景"></a>测试场景</h1><blockquote>
+<p>首先明确要测试的接口场景</p>
+</blockquote>
+<ol>
+<li>平台下登陆做了随机值+对称公钥加密做MD5的方式进行密码认证,要考虑登陆问题</li>
+<li>接口请求是POST请求，需要设置传参的方式和请求头关于报文的格式</li>
+<li>一个页面有多个接口调用，需要出整体的性能级别报告</li>
+</ol>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="创建线程组"><a href="#创建线程组" class="headerlink" title="创建线程组"></a>创建线程组</h2><p>首先进入应用界面，新建线程组<br>右键添加线程组<br><img src="/images/pasted-36.png" alt="添加线程组"><br>线程组配置如下，先设置1个线程数，1次循环，调试单个接口能正常调用<br><img src="/images/pasted-37.png" alt="添加线程组"></p>
+<blockquote>
+<p>相关参数释义：<br> 线程数：虚拟用户数，一个虚拟用户占用一个进程或线程。设置多少虚拟用户数在这里也就是设置多少个线程数<br>Ramp-Up Period(in seconds)：设置的虚拟用户数需要多长时间全部启动。如果线程数为10 ，Ramp-Up Period为100，那么就是100秒钟内启动10个线程。每一个线程都会在上一个线程启动10秒钟后才开始运行；设置为0则表示同时启动（注：Ramp-Up Period(in secods)不能设置太小的数值，否则会一开始就给服务器过大的压力；也不能设置太大的数值，否则第一个线程已经执行完了，最后一个还没启动的情况）刚开始Ramp-Up值可以等于总线程数，之后再作调整<br>循环次数：每个线程发送请求的次数，如果线程数为20 ，循环次数为100 ，那么每个线程发送100次请求。总请求数为20*100=2000 。如果勾选了“永远”，那么所有线程会一直发送请求，一到选择停止运行脚本。<br>启动时间：线程运行的起始时间<br>结束时间：线程运行的结束时间<br>持续时间：设置了持续时间则启动时间会失效<br>启动延迟：设置了启动延迟则结束时间会失效<br>线程数1000循环1次与线程数10循环100次的区别：线程数1000循环1次可以选择并发；线程数10循环100次是类似于长时间施加压力</p>
+</blockquote>
+<h2 id="登陆验证"><a href="#登陆验证" class="headerlink" title="登陆验证"></a>登陆验证</h2><blockquote>
+<p>首先明确javaWeb的项目工程，对于身份的登陆状态一般都是使用获取Session方式来判断是否登陆，使用用户名密码的形式因为密码做了加密，所以我们这里的解决方案为，使用Google浏览器做个登陆，然后在浏览器获取SessionID，使用sessionID模拟已经登陆的状态</p>
+</blockquote>
+<ol>
+<li>首先登陆，</li>
+<li>F12，打开Google浏览器的调试界面，打开network选项卡，随便点击一个按钮，发起接口请求</li>
+<li>打开请求详情，Request Headers就是我们要的内容<br><img src="/images/pasted-39.png" alt="Google调试页"></li>
+<li>右键线程组添加HTTP信息请求头管理器<br><img src="/images/pasted-40.png" alt="添加HTTP信息请求头管理器"></li>
+<li>将请求头内容相关粘贴到配置中<br><img src="/images/pasted-41.png" alt="upload successful"></li>
+</ol>
+<h2 id="创建HTTP请求"><a href="#创建HTTP请求" class="headerlink" title="创建HTTP请求"></a>创建HTTP请求</h2><p>在线程组内添加HTTP请求<br><img src="/images/pasted-38.png" alt="创建HTTP请求"><br>配置HTTP请求参数</p>
+<blockquote>
+<p>注: json格式的报文，必须在<code>消息体数据</code>选项卡内填写报文，不能再参数内填写</p>
+</blockquote>
+<p><img src="/images/pasted-42.png" alt="配置HTTP请求参数"></p>
+<h2 id="添加监听器"><a href="#添加监听器" class="headerlink" title="添加监听器"></a>添加监听器</h2><p>在整个测试计划中，添加相关结果类的监听器<br><img src="/images/pasted-43.png" alt="添加监听器"></p>
+<p>启动任务，查看相关报告</p>
+<h2 id="最终结果"><a href="#最终结果" class="headerlink" title="最终结果"></a>最终结果</h2><p>使用5个线程模拟并发，循环5次，对30多个接口进行同步请求：<br><img src="/images/pasted-45.png" alt="汇总报告"><br><img src="/images/pasted-44.png" alt="响应时间图"></p>
+<blockquote>
+<p>参考：<br><a href="https://blog.csdn.net/huashao0602/article/details/72845378" target="_blank" rel="noopener">https://blog.csdn.net/huashao0602/article/details/72845378</a><br><a href="https://www.cnblogs.com/test002/p/8034154.html" target="_blank" rel="noopener">https://www.cnblogs.com/test002/p/8034154.html</a></p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">itboyer</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://itboyer.github.io/43128/">http://itboyer.github.io/43128/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://itboyer.github.io">ITBOYER'S BLOG</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JMeter/">JMeter</a><a class="post-meta__tags" href="/tags/性能测试/">性能测试</a></div><div class="post-qr-code"><div class="post-qr-code-item"><img class="post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">支付宝打赏</div></div><div class="post-qr-code-item"><img class="post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">微信打赏</div></div></div><div class="social-share" data-disabled="google"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/7840/"><span>HDP集群运维-磁盘扩容和节点扩展</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"></div><div class="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="/dist/Valine.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  av: AV, 
+  el: '.vcomment',
+  notify: notify,
+  verify: verify,
+  app_id: 'Sb3I3kxloC2uM8kp7GwsFXyN-gzGzoHsz',
+  app_key: 'k6Jad1ggWtw42O55GAAMbFdu',
+  avatar:'robohash',
+  guest_info:guest_info,
+  pageSize:'10',
+  placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+  lang: 'zh-cn',
+  emoticon_url: '/images/alu',
+  emoticon_list: ["吐.png","喷血.png","狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","中指.png","尴尬.png","瞅你.png","想一想.png","中枪.png","得意.png","肿包.png","扇耳光.png","亲亲.png","惊喜.png","脸红.png","无所谓.png","便便.png","愤怒.png","蜡烛.png","献黄瓜.png","内伤.png","投降.png","观察.png","看不见.png","击掌.png","抠鼻.png","邪恶.png","看热闹.png","口水.png","抽烟.png","锁眉.png","装大款.png","吐舌.png","无奈.png","长草.png","赞一个.png","呲牙.png","无语.png","阴暗.png","不出所料.png","咽气.png","期待.png","高兴.png","吐血倒地.png","哭泣.png","欢呼.png","黑线.png","喜极而泣.png","喷水.png","深思.png","鼓掌.png","暗地观察.png"]
+})</script></div></div><footer id="footer" style="background: url(/img/keyclack.jpg)  no-repeat center top/cover;background-position:  bottom; "><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By itboyer</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/custom.js?version=10.2.16"></script><script src="/js/particle.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script src="/js/search/local-search.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

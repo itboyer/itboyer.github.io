@@ -3,6 +3,25 @@
   
     
     <entry>
+      <title>JMeter测试案例[加密登录、post请求]</title>
+      <link href="/43128/"/>
+      <url>/43128/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>近期项目上做了接口的平台迁移，为了测试迁移前后的性能损耗，以及socket长短连接的响应耗时时长，想测一下相关接口的性能级别<br>百度了一下相关测试软件，JMeter的文档比较多，使用率比较高，就跟着网上教程现学现卖了一下，做个小记录，方便以后翻阅</p></blockquote><h1 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h1><ol><li>官方网站：<a href="http://jmeter.apache.org/" target="_blank" rel="noopener">http://jmeter.apache.org/</a> 在这里我下载的是最新版5.0的zip包</li><li>5.0版本依赖JDK8以上的环境，配置JAVA_HOME</li><li>解压后， 运行  “bin/jmeter.bat”如果运行不了，请检查JDK是否正常配置，javaw.exe是否在环境变量中</li><li>Jmeter是支持中文的， 启动Jmeter 后， 点击 Options -&gt; Choose Language  来选择语言，如果低版本的找不到选择语音的选项，可以看下bin/jmeter.properties 在36行左右有语言配置设置<code>language=zh_CN</code><a id="more"></a></li></ol><h1 id="测试场景"><a href="#测试场景" class="headerlink" title="测试场景"></a>测试场景</h1><blockquote><p>首先明确要测试的接口场景</p></blockquote><ol><li>平台下登陆做了随机值+对称公钥加密做MD5的方式进行密码认证,要考虑登陆问题</li><li>接口请求是POST请求，需要设置传参的方式和请求头关于报文的格式</li><li>一个页面有多个接口调用，需要出整体的性能级别报告</li></ol><h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="创建线程组"><a href="#创建线程组" class="headerlink" title="创建线程组"></a>创建线程组</h2><p>首先进入应用界面，新建线程组<br>右键添加线程组<br><img src="/images/pasted-36.png" alt="添加线程组"><br>线程组配置如下，先设置1个线程数，1次循环，调试单个接口能正常调用<br><img src="/images/pasted-37.png" alt="添加线程组"></p><blockquote><p>相关参数释义：<br> 线程数：虚拟用户数，一个虚拟用户占用一个进程或线程。设置多少虚拟用户数在这里也就是设置多少个线程数<br>Ramp-Up Period(in seconds)：设置的虚拟用户数需要多长时间全部启动。如果线程数为10 ，Ramp-Up Period为100，那么就是100秒钟内启动10个线程。每一个线程都会在上一个线程启动10秒钟后才开始运行；设置为0则表示同时启动（注：Ramp-Up Period(in secods)不能设置太小的数值，否则会一开始就给服务器过大的压力；也不能设置太大的数值，否则第一个线程已经执行完了，最后一个还没启动的情况）刚开始Ramp-Up值可以等于总线程数，之后再作调整<br>循环次数：每个线程发送请求的次数，如果线程数为20 ，循环次数为100 ，那么每个线程发送100次请求。总请求数为20*100=2000 。如果勾选了“永远”，那么所有线程会一直发送请求，一到选择停止运行脚本。<br>启动时间：线程运行的起始时间<br>结束时间：线程运行的结束时间<br>持续时间：设置了持续时间则启动时间会失效<br>启动延迟：设置了启动延迟则结束时间会失效<br>线程数1000循环1次与线程数10循环100次的区别：线程数1000循环1次可以选择并发；线程数10循环100次是类似于长时间施加压力</p></blockquote><h2 id="登陆验证"><a href="#登陆验证" class="headerlink" title="登陆验证"></a>登陆验证</h2><blockquote><p>首先明确javaWeb的项目工程，对于身份的登陆状态一般都是使用获取Session方式来判断是否登陆，使用用户名密码的形式因为密码做了加密，所以我们这里的解决方案为，使用Google浏览器做个登陆，然后在浏览器获取SessionID，使用sessionID模拟已经登陆的状态</p></blockquote><ol><li>首先登陆，</li><li>F12，打开Google浏览器的调试界面，打开network选项卡，随便点击一个按钮，发起接口请求</li><li>打开请求详情，Request Headers就是我们要的内容<br><img src="/images/pasted-39.png" alt="Google调试页"></li><li>右键线程组添加HTTP信息请求头管理器<br><img src="/images/pasted-40.png" alt="添加HTTP信息请求头管理器"></li><li>将请求头内容相关粘贴到配置中<br><img src="/images/pasted-41.png" alt="upload successful"></li></ol><h2 id="创建HTTP请求"><a href="#创建HTTP请求" class="headerlink" title="创建HTTP请求"></a>创建HTTP请求</h2><p>在线程组内添加HTTP请求<br><img src="/images/pasted-38.png" alt="创建HTTP请求"><br>配置HTTP请求参数</p><blockquote><p>注: json格式的报文，必须在<code>消息体数据</code>选项卡内填写报文，不能再参数内填写</p></blockquote><p><img src="/images/pasted-42.png" alt="配置HTTP请求参数"></p><h2 id="添加监听器"><a href="#添加监听器" class="headerlink" title="添加监听器"></a>添加监听器</h2><p>在整个测试计划中，添加相关结果类的监听器<br><img src="/images/pasted-43.png" alt="添加监听器"></p><p>启动任务，查看相关报告</p><h2 id="最终结果"><a href="#最终结果" class="headerlink" title="最终结果"></a>最终结果</h2><p>使用5个线程模拟并发，循环5次，对30多个接口进行同步请求：<br><img src="/images/pasted-45.png" alt="汇总报告"><br><img src="/images/pasted-44.png" alt="响应时间图"></p><blockquote><p>参考：<br><a href="https://blog.csdn.net/huashao0602/article/details/72845378" target="_blank" rel="noopener">https://blog.csdn.net/huashao0602/article/details/72845378</a><br><a href="https://www.cnblogs.com/test002/p/8034154.html" target="_blank" rel="noopener">https://www.cnblogs.com/test002/p/8034154.html</a></p></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> JMeter </tag>
+            
+            <tag> 性能测试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>HDP集群运维-磁盘扩容和节点扩展</title>
       <link href="/7840/"/>
       <url>/7840/</url>
