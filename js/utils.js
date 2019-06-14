@@ -85,8 +85,9 @@ $(function() {
 				url: path+"/link.txt",
 				type:"get",
 				success:function (data) {
+					$(".tab-content .active .pathMenu").empty();
 					data.trim().split('\n').forEach(function(v, i) {
-						$(".tab-content .active").append((i+1)+'. <a href="'+path +'/' +v+'">'+v.split(".html")[0]+'</a><br/>');
+						$(".tab-content .active .pathMenu").append((i+1)+'. <a href="'+path +'/' +v+'">'+v.split(".html")[0]+'</a><br/>');
 					})
 					//
 					initFlag = true;
