@@ -63,7 +63,7 @@ $(function() {
 		$(this).addClass('active').siblings().removeClass('active');
 		var tActive = $(this).find('a').attr('href');
 		$(tActive).addClass('active').siblings().removeClass('active');
-
+		initFlag = false;
 		// Clear location hash in browser if #permalink exists.
 		if (location.hash !== '') {
 			
