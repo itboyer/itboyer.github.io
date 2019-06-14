@@ -47,7 +47,7 @@ mobile-smallest()
 }
 .tabs .tab-content .tab-pane {
   border: 1px solid #ddd;
-  padding: 20px 20px 0 20px;
+  padding: 0px 20px 20 20px;
 }
 .tabs .tab-content .tab-pane:not(.active) {
   display: none !important;
