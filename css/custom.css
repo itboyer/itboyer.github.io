@@ -73,4 +73,6 @@ canvas{
     position: absolute;
 	z-index: 10
 }
-
+.tab-content.tab-pane{
+   padding: 0px 20px 20px 20px;
+}
